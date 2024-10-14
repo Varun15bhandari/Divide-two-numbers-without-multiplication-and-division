@@ -1,0 +1,46 @@
+class Solution {
+
+    /* Function to divide two numbers
+    without multiplication and division */
+    public int divide(int dividend, int divisor) {
+
+        // Base case
+        if (dividend == divisor) return 1;
+
+        // Variable to store the sign of result
+        boolean isPositive = true;
+
+        // Updating the sign of quotient
+        if (dividend >= 0 && divisor < 0)
+            isPositive = false;
+        else if (dividend < 0 && divisor > 0)
+            isPositive = false;
+
+        // Storing absolute dividend & divisor
+        int n = Math.abs(dividend);
+        int d = Math.abs(divisor);
+
+        // Variable to store the answer and sum
+        int ans = 0, sum = 0;
+
+        /* Looping while sum added to divisor is
+        less than or equal to divisor */
+        while (sum + d <= n) {
+
+            // Increment the count
+            ans++;
+            // Update the sum
+            sum += d;
+        }
+
+        // Handling overflowing condition
+        if (ans > Integer.MAX_VALUE && isPositive)
+            return Integer.MAX_VALUE;
+        if (ans > Integer.MAX_VALUE && !isPositive)
+            return Integer.MIN_VALUE;
+
+        /* Returning the quotient 
+        with proper sign */
+        return isPositive ? ans : -1 * ans;
+    }
+}
